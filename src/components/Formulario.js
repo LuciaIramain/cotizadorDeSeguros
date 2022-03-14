@@ -100,8 +100,6 @@ const Formulario = ({guardarResumen, guardarCargando}) => {
                 datos
             });
         }, 1000)
-
-        // Total
     }
 
     return (
