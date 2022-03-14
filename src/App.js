@@ -4,6 +4,7 @@ import Formulario from './components/Formulario';
 import Resumen from './components/Resumen';
 import Resultado from './components/Resultado';
 import Spinner from './components/Spinner';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 const Contenedor = styled.div`
@@ -50,4 +51,7 @@ function App() {
   );
 }
 
+Header.propTypes = {
+  titulo: PropTypes.string.isRequired
+}
 export default App;
