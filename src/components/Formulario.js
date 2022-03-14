@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
 const Campo = styled.div`
@@ -36,14 +36,68 @@ const Boton = styled.button`
         background-color: #26C6DA;
     }
 `;
+const Error = styled.div`
+        background-color: red;
+        color: white;
+        padding: 1rem;
+        width:100%;
+        text-align: center;
+        margin-bottom: 2rem;
+    `;
 
 const Formulario = () => {
+
+    const [ datos, guardarDatos ] = useState({
+        marca: '',
+        year: '',
+        plan: ''
+    });
+    const [ error, guardarError ] = useState(false);
+
+    // Extraer los valores del state
+    const { marca, year, plan } = datos;
+
+    // leer los datos del formulario y colocarlos en el state
+    const obtenerInformacion = e => {
+        guardarDatos({
+            ...datos,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    // submit
+    const cotizarSeguro = e => {
+        e.preventDefault();
+        if(marca.trim() === '' || year.trim() === ''|| plan.trim() === '' ) {
+            guardarError(true);
+            return;
+        } 
+        // Obtener la diferencia de años
+
+        // Por cada año hay que restar el 30%
+
+        // Americano 15%
+        // Asiatico 5%
+        // Europeo 30%
+
+        // Plan basico aumenta 20%
+        
+        // Completo aumento 50%
+
+        // Total
+    }
+
     return (
         <div>
-            <form>
+            <form onSubmit={cotizarSeguro}>
+                { error ? <Error>Todos los campos son obligatorios</Error> : null}
                 <Campo>
                     <Label>Marca </Label>
-                    <Select>
+                    <Select
+                        name='marca'
+                        value={marca}
+                        onChange={obtenerInformacion}
+                    >
                         <option value="">-- Seleccione --</option>
                         <option value="americano">Americano</option>
                         <option value="europeo">Europeo</option>
@@ -52,7 +106,11 @@ const Formulario = () => {
                 </Campo>
                 <Campo>
                     <Label>Año </Label>
-                    <Select>
+                    <Select
+                        name='year'
+                        value={year}
+                        onChange={obtenerInformacion}
+                    >
                         <option value="">-- Seleccione --</option> 
                         <option value="2022">2022</option>
                         <option value="2021">2021</option>
@@ -72,13 +130,17 @@ const Formulario = () => {
                     <InputRadio type="radio"
                         name='plan'
                         value="basico" 
+                        checked={plan === 'basico'}
+                        onChange={obtenerInformacion}
                     /> Básico
                     <InputRadio type="radio"
                         name='plan'
                         value="completo" 
+                        checked={plan === 'completo'}
+                        onChange={obtenerInformacion}
                     /> Completo
                 </Campo>
-                <Boton type='button'>Cotizar</Boton>
+                <Boton type='submit'>Cotizar</Boton>
             </form>
         </div>
     );
