@@ -11,6 +11,10 @@ https://github.com/LuciaIramain/cotizadorDeSeguros.git
 https://tobiasahlin.com/spinkit/
 React-transition-group
 
-#### Autores
+#### Puede visualizar el sitio
+
+https://cotizador-de-seguro-autos.netlify.app/
+
+##### Autores
 
 Lucía Iramain
